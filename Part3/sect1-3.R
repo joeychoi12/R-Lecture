@@ -15,6 +15,8 @@ print(3,4) # 하나만 찍힌다
 # 1) Indentation (조건식,반복문,함수) 
 # 2) Comment 
 
+# Stackoverflow
+
 print('a', 'b') #에러발생 
 cat(1,':','a','\n',2,':','b')
 3;4;5;

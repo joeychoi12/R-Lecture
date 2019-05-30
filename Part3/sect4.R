@@ -76,3 +76,54 @@ summary(gender1)
 View(txt1)
 
 stringsAsFactors = FALSE
+
+#날짜와 시간 
+Sys.Date()
+Sys.time()
+date()
+class(Sys.Date())
+class("2019-05-30")      
+as.Date("2019-05-30")
+as.Date("01-11-2014")
+as.Date("19-05-30")
+as.Date("01-11-2014",format="%d-%m-%y")
+as.Date("19-05-30",format="%y-%m-%d")
+as.Date("190530",format="%y%m%d")
+as.Date("2014년 11월 1일",format="%Y년 %m월 %d일")
+as.Date("05-30",format="%m-%d")
+as.Date(10, origin="2019-05-30")
+as.Date(20, origin=date()) #문자열만 가능
+as.Date(20, origin=Sys.Date()) #Alternative
+
+as.Date(-10,origin = "2019-05-30")
+"2019-05-30"-"2019-05-27"
+as.Date("2019-05-30")-as.Date("2019-05-27")
+as.Date("2014-11-15")+5
+as.Date("2019-11-14") - as.Date(date())
+as.Date("2019-11-14") - Sys.Date()
+
+as.Date("2014-11-01 20:00:00") - as.Date("2014-11-01 18:30") #POSIXct
+as.POSIXct("2014-11-01 20:00:00") - as.POSIXct("2014-11-01 18:30:30")
+0.491667 * 60
+0.50002 *60
+
+install.packages("lubridate")
+
+#R Package Commonly used 
+#dplry
+#ggplot2
+options(repos = c(CRAN = "http://cran.rstudio.com")) #set a default CRAN mirror
+
+library(lubridate)
+now()
+date = now()
+year(date)
+month(date)
+month(date, label = T)
+day(date)
+wday(date)
+wday(date, label=T)
+date <- date - days(2); date
+month(date) <-2; date
+date+months(3)
+date <-hm("22:30") ; date

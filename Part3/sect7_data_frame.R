@@ -140,3 +140,5 @@ new_data <- data.frame(나라="Russia", 가격=600, 랭킹=5)
 rbind(travel_df,new_data)
 positions <- order(travel_df$가격)
 travel_df[positions,]
+
+travel_df <- travel_df[-c((나라="Russia" 가격=600, 랭킹=5))]

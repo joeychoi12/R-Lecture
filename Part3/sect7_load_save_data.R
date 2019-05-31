@@ -55,8 +55,8 @@ install.packages("sqldf")
 library('sqldf')
 Fruits
 
-SELECT * from DB_table 
-WHERE Year = 2008
+#SELECT * from DB_table 
+#WHERE Year = 2008
 
 #write fruits sql csv file 
 write.csv(Fruits, "Fruits_sql.csv", quote=F, row.names = F)
@@ -81,3 +81,5 @@ fruits7 <- read_excel("fruits_6.xls", # path
   col_types = "guess", # guess the types of columns
   na = "NA") # Character vector of strings to use for missing values
 fruits7
+subset(Fruits, Fruits$Year==2008)
+

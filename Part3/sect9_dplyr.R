@@ -101,7 +101,7 @@ Fruits %>%
 #7 Sales and Profit
 Fruits %>%
   group_by(Fruit) %>%
-  summarise_each(funs(sum), Sales, Profit)
+  summarise_each(funs(sum), Sales, Profit) 
 
 
 

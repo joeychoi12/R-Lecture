@@ -1,0 +1,70 @@
+1
+SELECT * FROM girl_group
+WHERE debut BETWEEN '2009-01-01' AND '2009-12-31'
+
+2
+SELECT gg.name, gg.debut, s.title
+FROM girl_group AS gg
+LEFT OUTER JOIN song AS s
+ON s._id = gg.hit_song_id 
+WHERE gg.debut BETWEEN '2009-01-01' AND '2009-12-31' ;
+
+
+#2. 풀이 
+SELECT gg.name AS '걸그룹 이름', gg.debut AS '데뷔일', s.title AS '제목'
+FROM girl_group AS gg
+INNER JOIN song AS s
+ON s._id = gg.hit_song_id 
+WHERE gg.debut BETWEEN '2009-01-01' AND '2009-12-31' ;
+
+
+3
+use world;
+SELECT continent ,COUNT(NAME) , SUM(gnp), AVG(gnp)
+FROM country 
+GROUP BY continent ;
+
+
+#3 풀이 
+use world;
+SELECT continent ,COUNT(*) , SUM(gnp), AVG(gnp)
+FROM country GROUP BY continent ;
+
+4
+SELECT ctry.Continent,ctry.NAME, cty.NAME, cty.Population
+FROM country AS ctry
+JOIN city AS cty
+ON ctry.CODE = cty.CountryCode 
+ORDER BY cty.Population DESC
+LIMIT 10 ;
+
+
+
+
+#4풀이 
+SELECT co.Continent AS '대륙명',co.NAME AS '국가명', c.NAME AS '도시명', c.Population AS '인구수'
+FROM country AS co
+INNER JOIN city AS c
+ON co.CODE = c.CountryCode 
+WHERE co.Continent='Asia'
+ORDER BY c.Population DESC
+LIMIT 10 ;
+
+
+
+5
+SELECT cty.NAME, cty.population, lang.LANGUAGE 
+FROM city AS cty 
+JOIN countrylanguage AS lang 
+ON cty.CountryCode = lang.CountryCode
+ORDER BY cty.population desc
+
+
+#### 5 풀이 ####
+USE world;
+SELECT c.NAME AS '도시명', c.population AS '인구수', lang.LANGUAGE AS '언어명'
+FROM city AS c 
+INNER JOIN countrylanguage AS lang 
+ON c.CountryCode = lang.CountryCode
+WHERE lang.ISOfficial = TRUE 
+ORDER BY c.population DESC LIMIT 10;

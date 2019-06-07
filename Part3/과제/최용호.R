@@ -20,6 +20,10 @@ append(four_lower, five_higher)
 #  mutate(av1 = mean())
 #  summarise_each(funs(mean), 경기, 타수, 타율)
 
+#######################################풀이###################################
+mpg4 <- filter(mpg,displ <=4)
+mpg5 <- filter(mpg, displ >=5)
+mean(mpg4$hwy) ; mean(mpg5$hwy)
 
 #2 Audi vs Toyota which manufacturer has a higher cty
 mpg %>%
@@ -29,15 +33,38 @@ mpg %>%
 
 #A: Toyota has better cty
 
+
+#######################################풀이###################################
+mpg_a <- filter(mpg, manufacturer == "audi")
+mpg_t <- filter(mpg, manufacturer == "toyota")
+mean(mpg_a$cty); mean(mpg_t$cty)
+
+mpg %>%
+  filter(manufacturer %in% c('audi','toyoya')) %>%
+  group_by(manufacturer) %>%
+  summarise(average = mean(cty))
+
 #3Chevy vs Ford vs Honda hwy average 
 mpg %>%
   filter(manufacturer %in% c('chevrolet', 'ford', 'honda')) %>%
   summarise(average = mean(hwy))
 
+
+#######################################풀이###################################
+
+
 #4 Making new data using class and cty variable
 new_mpg <- mpg %>%
   select(class,cty)
 new_mpg  
+
+
+#######################################풀이###################################
+
+mpg_4 <- select(mpg,class,cty) %>%
+  
+  head(mpg_4); tail(mpg_4)
+
 
 
 #5 Which class has a better cty?
@@ -49,6 +76,7 @@ new_mpg %>%
 #6 From Audi's products which rank 1-5 for best hwy
 new1_mpg <- mpg %>%
   filter(manufacturer == "audi",) %>%
+  #select(manufacturer,model,year)
   arrange(desc(hwy))
 head(new1_mpg, 5)  
 
@@ -75,6 +103,7 @@ mpg %>%
   arrange(desc(fuelavg)) %>%
   head(5)
 
+
 #8 cty average by class 
 mpg %>% 
   group_by(class) %>%
@@ -99,5 +128,11 @@ mpg %>%
 mpg %>%
   group_by(manufacturer) %>%
   summarise_each(funs(n()), class) %>%
+  arrange(desc(class))
+
+mpg %>%
+  filter(class == 'compact') %>%
+  group_by(manufacturer) %>%
+  summarise(count = n()) %>%
   arrange(desc(class))
 

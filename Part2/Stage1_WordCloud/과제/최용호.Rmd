@@ -1,0 +1,542 @@
+---
+title: "응답소 12개월 분석"
+author: "Joey Choi"
+date: '2019 6 11 '
+output: html_document
+---
+```{r setup, include=FALSE}
+
+library(KoNLP)
+library(stringr)
+library(wordcloud)
+library(RColorBrewer)
+library(wordcloud2)
+
+
+```
+
+
+
+# 응답소 12개월 분석 
+
+
+## \center 2015 1월 \center
+```{r}
+data <- readLines("응답소_2015_01.txt")
+data2 <- sapply(data, extractNoun, USE.NAMES = F)
+#data2
+#head(unlist(data2),30)
+cdata <- unlist(data2)
+eungdapso <- str_replace_all(cdata,"[^{:alpha]]","") 
+
+#eungdapso
+
+
+txt <- readLines("응답소_gsub.txt")
+#txt
+for(i in 1:length(txt)) {
+  eungdapso <- gsub(txt[i],"",eungdapso)
+}
+eungdapso <- gsub("\\d+","",eungdapso) ## 숫자 없애기 
+eungdapso <- gsub("상담내용","",eungdapso)
+eungdapso <- gsub("--상담내용","",eungdapso)
+eungdapso <- gsub("--","",eungdapso)
+eungdapso <- Filter(function(x) {nchar(x) >=2}, eungdapso)
+
+
+#eungdapso
+#unlist(eungdapso)
+write(unlist(eungdapso),"응답소_1.txt")
+eungdapso2 <- read.table("응답소_1.txt" ,quote = "")
+#nrow(eungdapso2)
+wordcount <- table(eungdapso2)
+#head(sort(wordcount,decreasing=T),30)
+
+set.seed(1234)
+palete <- brewer.pal(8, "Dark2")
+
+
+wordcloud(names(wordcount), max.words = 150, freq=wordcount,scale=c(3,.5),rot.per = 0.35,min.freq = 2,
+          random.order = F, random.color = T,colors=palete)
+legend(0.25,0.9,"1월 응답소 페이지 분석", cex=0.8,fill=NA,border=NA,bg="white",text.col="red",text.font=2,box.col="red")
+
+
+```
+
+
+```{r pressure, echo=FALSE, fig.cap="wordcloud2", out.width = '50%'}
+
+knitr::include_graphics("list/Rplot.png")
+
+```
+
+
+
+##  2015 2월
+```{r}
+
+data <- readLines("응답소_2015_02.txt")
+data2 <- sapply(data, extractNoun, USE.NAMES = F)
+#data2
+#head(unlist(data2),30)
+cdata <- unlist(data2)
+eungdapso <- str_replace_all(cdata,"[^{:alpha]]","") 
+
+#eungdapso
+
+
+txt <- readLines("응답소_gsub.txt")
+#txt
+for(i in 1:length(txt)) {
+  eungdapso <- gsub(txt[i],"",eungdapso)
+}
+eungdapso <- gsub("\\d+","",eungdapso) ## 숫자 없애기 
+eungdapso <- gsub("__","",eungdapso) 
+eungdapso <- gsub("상담내용","",eungdapso)
+eungdapso <- gsub("--상담내용","",eungdapso)
+eungdapso <- gsub("--","",eungdapso)
+eungdapso <- Filter(function(x) {nchar(x) >=2}, eungdapso)
+
+
+#eungdapso
+#unlist(eungdapso)
+write(unlist(eungdapso),"응답소_1.txt")
+eungdapso2 <- read.table("응답소_1.txt" ,quote = "")
+#nrow(eungdapso2)
+wordcount <- table(eungdapso2)
+#head(sort(wordcount,decreasing=T),30)
+
+set.seed(1212)
+palete <- brewer.pal(6, "Set2")
+wordcloud(names(wordcount), max.words = 55, freq=wordcount,scale=c(4,.5),rot.per = 0.25,min.freq = 2,
+          random.order = F, random.color = T,colors=palete)
+legend(0.25,0.9,"2월 응답소 페이지 분석", cex=0.8,fill=NA,border=NA,bg="white",text.col="red",text.font=2,box.col="red")
+
+
+
+```
+
+
+## 2015 3월 
+```{r}
+
+data <- readLines("응답소_2015_03.txt")
+data2 <- sapply(data, extractNoun, USE.NAMES = F)
+#data2
+#head(unlist(data2),30)
+cdata <- unlist(data2)
+eungdapso <- str_replace_all(cdata,"[^{:alpha]]","") 
+
+#eungdapso
+
+
+txt <- readLines("응답소_gsub.txt")
+#txt
+for(i in 1:length(txt)) {
+  eungdapso <- gsub(txt[i],"",eungdapso)
+}
+eungdapso <- gsub("\\d+","",eungdapso) ## 숫자 없애기 
+eungdapso <- gsub("상담내용","",eungdapso)
+eungdapso <- gsub("--상담내용","",eungdapso)
+eungdapso <- gsub("--","",eungdapso)
+eungdapso <- Filter(function(x) {nchar(x) >=2}, eungdapso)
+
+
+
+#eungdapso
+#unlist(eungdapso)
+write(unlist(eungdapso),"응답소_1.txt")
+eungdapso2 <- read.table("응답소_1.txt" ,quote = "")
+#nrow(eungdapso2)
+wordcount <- table(eungdapso2)
+#head(sort(wordcount,decreasing=T),30)
+
+set.seed(1212)
+palete <- brewer.pal(6, "Set2")
+wordcloud(names(wordcount), max.words = 49, freq=wordcount,scale=c(4,.5),rot.per = 0.25,min.freq = 2,
+          random.order = F, random.color = T,colors=palete)
+legend(0.25,0.9,"3월 응답소 페이지 분석", cex=0.8,fill=NA,border=NA,bg="white",text.col="red",text.font=2,box.col="red")
+
+```
+
+
+
+## 2015 4월 
+```{r}
+
+data <- readLines("응답소_2015_04.txt")
+data2 <- sapply(data, extractNoun, USE.NAMES = F)
+#data2
+#head(unlist(data2),30)
+cdata <- unlist(data2)
+eungdapso <- str_replace_all(cdata,"[^{:alpha]]","") 
+eungdapso <- Filter(function(x) {nchar(x) >=2}, eungdapso)
+
+#eungdapso
+
+
+txt <- readLines("응답소_gsub.txt")
+#txt
+for(i in 1:length(txt)) {
+  eungdapso <- gsub(txt[i],"",eungdapso)
+}
+eungdapso <- gsub("\\d+","",eungdapso) ## 숫자 없애기 
+eungdapso <- gsub("상담내용","",eungdapso)
+eungdapso <- gsub("--상담내용","",eungdapso)
+eungdapso <- gsub("--","",eungdapso)
+
+
+#eungdapso
+#unlist(eungdapso)
+write(unlist(eungdapso),"응답소_1.txt")
+eungdapso2 <- read.table("응답소_1.txt" ,quote = "")
+#nrow(eungdapso2)
+wordcount <- table(eungdapso2)
+#head(sort(wordcount,decreasing=T),30)
+
+set.seed(1212)
+palete <- brewer.pal(6, "Set2")
+wordcloud(names(wordcount), max.words = 49, freq=wordcount,scale=c(4,.5),rot.per = 0.25,min.freq = 2,
+          random.order = F, random.color = T,colors=palete)
+legend(0.25,0.9,"4월 응답소 페이지 분석", cex=0.8,fill=NA,border=NA,bg="white",text.col="red",text.font=2,box.col="red")
+
+```
+
+
+
+## 2015 5월 
+```{r}
+
+data <- readLines("응답소_2015_05.txt")
+data2 <- sapply(data, extractNoun, USE.NAMES = F)
+#data2
+#head(unlist(data2),30)
+cdata <- unlist(data2)
+eungdapso <- str_replace_all(cdata,"[^{:alpha]]","") 
+
+#eungdapso
+
+
+txt <- readLines("응답소_gsub.txt")
+#txt
+for(i in 1:length(txt)) {
+  eungdapso <- gsub(txt[i],"",eungdapso)
+}
+eungdapso <- gsub("\\d+","",eungdapso) ## 숫자 없애기 
+eungdapso <- gsub("상담내용","",eungdapso)
+eungdapso <- gsub("--상담내용","",eungdapso)
+eungdapso <- gsub("--","",eungdapso)
+eungdapso <- Filter(function(x) {nchar(x) >=2}, eungdapso)
+
+
+#eungdapso
+#unlist(eungdapso)
+write(unlist(eungdapso),"응답소_1.txt")
+eungdapso2 <- read.table("응답소_1.txt" ,quote = "")
+#nrow(eungdapso2)
+wordcount <- table(eungdapso2)
+#head(sort(wordcount,decreasing=T),30)
+
+set.seed(1212)
+palete <- brewer.pal(6, "Set2")
+wordcloud(names(wordcount), max.words = 49, freq=wordcount,scale=c(4,.5),rot.per = 0.25,min.freq = 2,
+          random.order = F, random.color = T,colors=palete)
+legend(0.25,0.9,"5월 응답소 페이지 분석", cex=0.8,fill=NA,border=NA,bg="white",text.col="red",text.font=2,box.col="red")
+
+```
+
+
+## 2015 6월 
+```{r}
+
+data <- readLines("응답소_2015_06.txt")
+data2 <- sapply(data, extractNoun, USE.NAMES = F)
+#data2
+#head(unlist(data2),30)
+cdata <- unlist(data2)
+eungdapso <- str_replace_all(cdata,"[^{:alpha]]","") 
+eungdapso <- Filter(function(x) {nchar(x) >=2}, eungdapso)
+
+#eungdapso
+
+
+txt <- readLines("응답소_gsub.txt")
+#txt
+for(i in 1:length(txt)) {
+  eungdapso <- gsub(txt[i],"",eungdapso)
+}
+eungdapso <- gsub("\\d+","",eungdapso) ## 숫자 없애기 
+eungdapso <- gsub("상담내용","",eungdapso)
+eungdapso <- gsub("--상담내용","",eungdapso)
+eungdapso <- gsub("--","",eungdapso)
+
+
+#eungdapso
+#unlist(eungdapso)
+write(unlist(eungdapso),"응답소_1.txt")
+eungdapso2 <- read.table("응답소_1.txt" ,quote = "")
+#nrow(eungdapso2)
+wordcount <- table(eungdapso2)
+#head(sort(wordcount,decreasing=T),30)
+
+set.seed(1212)
+palete <- brewer.pal(6, "Set2")
+wordcloud(names(wordcount), max.words = 49, freq=wordcount,scale=c(4,.5),rot.per = 0.25,min.freq = 2,
+          random.order = F, random.color = T,colors=palete)
+legend(0.25,0.9,"6월 응답소 페이지 분석", cex=0.8,fill=NA,border=NA,bg="white",text.col="red",text.font=2,box.col="red")
+
+```
+
+
+
+## 2015 7월 
+```{r}
+
+data <- readLines("응답소_2015_07.txt")
+data2 <- sapply(data, extractNoun, USE.NAMES = F)
+#data2
+#head(unlist(data2),30)
+cdata <- unlist(data2)
+eungdapso <- str_replace_all(cdata,"[^{:alpha]]","") 
+eungdapso <- Filter(function(x) {nchar(x) >=2}, eungdapso)
+
+#eungdapso
+
+
+txt <- readLines("응답소_gsub.txt")
+#txt
+for(i in 1:length(txt)) {
+  eungdapso <- gsub(txt[i],"",eungdapso)
+}
+eungdapso <- gsub("\\d+","",eungdapso) ## 숫자 없애기 
+eungdapso <- gsub("상담내용","",eungdapso)
+eungdapso <- gsub("--상담내용","",eungdapso)
+eungdapso <- gsub("--","",eungdapso)
+
+
+#eungdapso
+#unlist(eungdapso)
+write(unlist(eungdapso),"응답소_1.txt")
+eungdapso2 <- read.table("응답소_1.txt" ,quote = "")
+#nrow(eungdapso2)
+wordcount <- table(eungdapso2)
+#head(sort(wordcount,decreasing=T),30)
+
+set.seed(1212)
+palete <- brewer.pal(6, "Set2")
+wordcloud(names(wordcount), max.words = 49, freq=wordcount,scale=c(4,.5),rot.per = 0.25,min.freq = 2,
+          random.order = F, random.color = T,colors=palete)
+legend(0.25,0.9,"7월 응답소 페이지 분석", cex=0.8,fill=NA,border=NA,bg="white",text.col="red",text.font=2,box.col="red")
+
+```
+
+
+
+## 2015 8월 
+```{r}
+
+data <- readLines("응답소_2015_08.txt")
+data2 <- sapply(data, extractNoun, USE.NAMES = F)
+#data2
+#head(unlist(data2),30)
+cdata <- unlist(data2)
+eungdapso <- str_replace_all(cdata,"[^{:alpha]]","") 
+eungdapso <- Filter(function(x) {nchar(x) >=2}, eungdapso)
+
+#eungdapso
+
+
+txt <- readLines("응답소_gsub.txt")
+#txt
+for(i in 1:length(txt)) {
+  eungdapso <- gsub(txt[i],"",eungdapso)
+}
+eungdapso <- gsub("\\d+","",eungdapso) ## 숫자 없애기 
+eungdapso <- gsub("상담내용","",eungdapso)
+eungdapso <- gsub("--상담내용","",eungdapso)
+eungdapso <- gsub("--","",eungdapso)
+
+
+#eungdapso
+#unlist(eungdapso)
+write(unlist(eungdapso),"응답소_1.txt")
+eungdapso2 <- read.table("응답소_1.txt" ,quote = "")
+#nrow(eungdapso2)
+wordcount <- table(eungdapso2)
+#head(sort(wordcount,decreasing=T),30)
+
+set.seed(1212)
+palete <- brewer.pal(6, "Set2")
+wordcloud(names(wordcount), max.words = 49, freq=wordcount,scale=c(4,.5),rot.per = 0.25,min.freq = 2,
+          random.order = F, random.color = T,colors=palete)
+legend(0.25,0.9,"8월 응답소 페이지 분석", cex=0.8,fill=NA,border=NA,bg="white",text.col="red",text.font=2,box.col="red")
+
+```
+
+
+
+## 2015 9월 
+```{r}
+
+data <- readLines("응답소_2015_09.txt")
+data2 <- sapply(data, extractNoun, USE.NAMES = F)
+#data2
+#head(unlist(data2),30)
+cdata <- unlist(data2)
+eungdapso <- str_replace_all(cdata,"[^{:alpha]]","") 
+eungdapso <- Filter(function(x) {nchar(x) >=2}, eungdapso)
+
+#eungdapso
+
+
+txt <- readLines("응답소_gsub.txt")
+#txt
+for(i in 1:length(txt)) {
+  eungdapso <- gsub(txt[i],"",eungdapso)
+}
+eungdapso <- gsub("\\d+","",eungdapso) ## 숫자 없애기 
+eungdapso <- gsub("상담내용","",eungdapso)
+eungdapso <- gsub("--상담내용","",eungdapso)
+eungdapso <- gsub("--","",eungdapso)
+
+
+#eungdapso
+#unlist(eungdapso)
+write(unlist(eungdapso),"응답소_1.txt")
+eungdapso2 <- read.table("응답소_1.txt" ,quote = "")
+#nrow(eungdapso2)
+wordcount <- table(eungdapso2)
+#head(sort(wordcount,decreasing=T),30)
+
+set.seed(1212)
+palete <- brewer.pal(6, "Set2")
+wordcloud(names(wordcount), max.words = 49, freq=wordcount,scale=c(4,.5),rot.per = 0.25,min.freq = 2,
+          random.order = F, random.color = T,colors=palete)
+legend(0.25,0.9,"9월 응답소 페이지 분석", cex=0.8,fill=NA,border=NA,bg="white",text.col="red",text.font=2,box.col="red")
+
+```
+
+
+## 2015 10월 
+```{r}
+
+data <- readLines("응답소_2015_10.txt")
+data2 <- sapply(data, extractNoun, USE.NAMES = F)
+#data2
+#head(unlist(data2),30)
+cdata <- unlist(data2)
+eungdapso <- str_replace_all(cdata,"[^{:alpha]]","") 
+eungdapso <- Filter(function(x) {nchar(x) >=2}, eungdapso)
+
+#eungdapso
+
+
+txt <- readLines("응답소_gsub.txt")
+#txt
+for(i in 1:length(txt)) {
+  eungdapso <- gsub(txt[i],"",eungdapso)
+}
+eungdapso <- gsub("\\d+","",eungdapso) ## 숫자 없애기 
+eungdapso <- gsub("상담내용","",eungdapso)
+eungdapso <- gsub("--상담내용","",eungdapso)
+eungdapso <- gsub("--","",eungdapso)
+
+
+#eungdapso
+#unlist(eungdapso)
+write(unlist(eungdapso),"응답소_1.txt")
+eungdapso2 <- read.table("응답소_1.txt" ,quote = "")
+#nrow(eungdapso2)
+wordcount <- table(eungdapso2)
+#head(sort(wordcount,decreasing=T),30)
+
+set.seed(1212)
+palete <- brewer.pal(6, "Set2")
+wordcloud(names(wordcount), max.words = 49, freq=wordcount,scale=c(4,.5),rot.per = 0.25,min.freq = 2,
+          random.order = F, random.color = T,colors=palete)
+legend(0.25,0.9,"10월 응답소 페이지 분석", cex=0.8,fill=NA,border=NA,bg="white",text.col="red",text.font=2,box.col="red")
+
+```
+
+
+## 2015 11월 
+```{r}
+
+data <- readLines("응답소_2015_11.txt")
+data2 <- sapply(data, extractNoun, USE.NAMES = F)
+#data2
+#head(unlist(data2),30)
+cdata <- unlist(data2)
+eungdapso <- str_replace_all(cdata,"[^{:alpha]]","") 
+
+#eungdapso
+
+
+txt <- readLines("응답소_gsub.txt")
+#txt
+for(i in 1:length(txt)) {
+  eungdapso <- gsub(txt[i],"",eungdapso)
+}
+eungdapso <- gsub("\\d+","",eungdapso) ## 숫자 없애기 
+eungdapso <- gsub("상담내용","",eungdapso)
+eungdapso <- gsub("--상담내용","",eungdapso)
+eungdapso <- gsub("--","",eungdapso)
+eungdapso <- Filter(function(x) {nchar(x) >=2}, eungdapso)
+
+
+#eungdapso
+#unlist(eungdapso)
+write(unlist(eungdapso),"응답소_1.txt")
+eungdapso2 <- read.table("응답소_1.txt" ,quote = "")
+#nrow(eungdapso2)
+wordcount <- table(eungdapso2)
+#head(sort(wordcount,decreasing=T),30)
+
+set.seed(1212)
+palete <- brewer.pal(6, "Set2")
+wordcloud(names(wordcount), max.words = 49, freq=wordcount,scale=c(4,.5),rot.per = 0.25,min.freq = 2,
+          random.order = F, random.color = T,colors=palete)
+legend(0.25,0.9,"11월 응답소 페이지 분석", cex=0.8,fill=NA,border=NA,bg="white",text.col="red",text.font=2,box.col="red")
+
+```
+
+
+## 2015 12월 
+```{r}
+
+data <- readLines("응답소_2015_12.txt")
+data2 <- sapply(data, extractNoun, USE.NAMES = F)
+#data2
+#head(unlist(data2),30)
+cdata <- unlist(data2)
+eungdapso <- str_replace_all(cdata,"[^{:alpha]]","") 
+#eungdapso
+
+
+txt <- readLines("응답소_gsub.txt")
+#txt
+for(i in 1:length(txt)) {
+  eungdapso <- gsub(txt[i],"",eungdapso)
+}
+eungdapso <- gsub("\\d+","",eungdapso) ## 숫자 없애기 
+eungdapso <- gsub("상담내용","",eungdapso)
+eungdapso <- gsub("--상담내용","",eungdapso)
+eungdapso <- gsub("--","",eungdapso)
+eungdapso <- Filter(function(x) {nchar(x) >=2}, eungdapso)
+
+
+#eungdapso
+#unlist(eungdapso)
+write(unlist(eungdapso),"응답소_1.txt")
+eungdapso2 <- read.table("응답소_1.txt" ,quote = "")
+#nrow(eungdapso2)
+wordcount <- table(eungdapso2)
+#head(sort(wordcount,decreasing=T),30)
+
+set.seed(1212)
+palete <- brewer.pal(6, "Set2")
+wordcloud(names(wordcount), max.words = 49, freq=wordcount,scale=c(4,.5),rot.per = 0.25,min.freq = 2,
+          random.order = F, random.color = T,colors=palete)
+legend(0.25,0.9,"12월 응답소 페이지 분석", cex=0.8,fill=NA,border=NA,bg="white",text.col="red",text.font=2,box.col="red")
+
+```

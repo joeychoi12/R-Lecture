@@ -1,0 +1,66 @@
+---
+title: "Untitled"
+author: "Joey Choi"
+date: '2019 6 12 '
+output: powerpoint_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(KoNLP)
+library(wordcloud2)
+library(ggplot2)
+library(wordcloud)
+library(dplyr)
+library(stringr)
+library(ggwordcloud)
+
+```
+
+##1. Word Cloud for Hiphop Lyric
+
+```{r}
+setwd("D:/workspace/R_Data_Analysis/Part2/Stage2_Graph/과제")
+txt <- readLines("hiphop.txt")
+nouns <- sapply(txt,extractNoun, USE.NAMES = F)
+head(unlist(nouns),30)
+cdata <- (unlist(nouns))
+hiphop <- str_replace_all(cdata,"[^[:alpha:]]","") #한글 영어 이외 삭제 
+hiphop <- Filter(function(x) {nchar(x) >=2}, hiphop)
+
+write(unlist(hiphop),"hiphop_lyrics.txt")
+rev <- read.table("hiphop_lyrics.txt")
+nrow(rev)
+head(rev,30)
+wordcount <- table(rev)
+head(sort(wordcount,decreasing =T),30)
+palete <- brewer.pal(7,"Set2")
+wordcloud(names(wordcount), freq=wordcount, scale=c(5,1), rot.per=0.25, min.freq = 2,
+          random.order = F, random.color =  T, colors = palete)
+legend(0.3,1,"   Hip Hop Lyric 분석     ", cex=0.8, fill=NA,border=NA,bg="white",
+       text.col="black",text.font=2,box.col="blue")
+
+
+
+```
+
+```{r}
+wordcloud2(wordcount, color = 'random-dark',backgroundColor = "white")
+
+```
+
+
+
+
+##2. Pie Chart for Top 10 Hiphop Lyric
+
+```{r}
+
+```
+
+
+##3. Bar graph for Top 10 Hiphop Lyric
+
+```{r}
+
+```

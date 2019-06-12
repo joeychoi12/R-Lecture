@@ -42,3 +42,4 @@ wordcloud(names(wordcount), freq=wordcount, scale=c(5,0.3), rot.per=0.1, min.fre
 legend(0.3,1,"제주도 추천 여행 코스 분석", cex=0.8, fill=NA,border=NA,bg="white",
        text.col="pink",text.font=2,box.col="blue")
 
+

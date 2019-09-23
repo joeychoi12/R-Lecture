@@ -3,7 +3,7 @@
 
 ### 교재: 더많이 R라뷰 (R을 활용한 데이터 분석 입문편)
 #### 저자: 서진수 (도서출판 더알음) 
-![download1](https://user-images.githubusercontent.com/51065085/65420633-a211f280-de3c-11e9-8a0a-0a26fe230ffd.jpg)
+![2](https://user-images.githubusercontent.com/51065085/65420668-bc4bd080-de3c-11e9-88ca-895349dcdf4e.jpg)
 
 
 ### 빅데이터를 활용한 스마트데이터 전문가 양성과정 
